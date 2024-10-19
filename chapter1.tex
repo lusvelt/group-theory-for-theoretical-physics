@@ -1,0 +1,68 @@
+\chapter{Introduction to group theory}
+The main reference for this chapter and the following ones is \cite{Tung1985}.
+
+
+\section{Basic Concepts}
+
+\begin{definition}[Group]
+    A group $G$ is a set endowed with an internal operation $\cdot: G \times G \rightarrow G$, which satisfies the following properties:
+    \begin{enumerate}
+        \item associativity
+        \begin{equation}
+            \forall g_1, g_2, g_3 \in G, (g_1 \cdot g_2) \cdot g_3 = g_1 \cdot (g_2 \cdot g_3)
+            \label{eq:group_associativity}
+        \end{equation}
+        \item existance of neutral element
+        \begin{equation}
+            \exists e \in G, \forall g \in G, g\cdot e = e\cdot g = g
+            \label{eq:group_neutral}
+        \end{equation}
+        \item existance of inverse
+        \begin{equation}
+            \forall g \in G, \exists g^{-1} \in G, g \cdot g^{-1} = g^{-1} \cdot g = e
+            \label{eq:group_inverse}
+        \end{equation}
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    The following properties hold:
+    \begin{enumerate}
+        \item The identity element $e \in G$ is unique. \label{prop:unique_neutral}
+        \item The inverse $g^{-1} \in G$ of each group element $g \in G$ is unique. \label{prop:unique_inverse}
+        \item The inverse of the inverse is the original element: $\forall g \in G, (g^{-1})^{-1} = g$ \label{prop:inv_of_inv}
+        \item $\forall g_1, g_2 \in G, (g_1 \cdot g_2)^{-1} = g_2^{-1} g_1^{-1}$ \label{prop:reverse_inv}
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    \eqref{prop:unique_neutral}
+    Suppose we had two identity elements $e_1, e_2 \in G$.
+    Then, by \eqref{eq:group_neutral}, we have
+    \begin{equation*}
+        e_1 = e_1 \cdot e_2 = e_2
+    \end{equation*}
+
+    \eqref{prop:unique_inverse}
+    Consider $g \in G$ and suppose it had to inverses $h_1, h_2 \in G$.
+    This means that $h_2 = e \cdot h_2 = (h_1 \cdot g) \cdot h_2 = h_1 \cdot (g \cdot h_2) = h_1 \cdot e = h_1$, where we used associativity \eqref{eq:group_associativity}.
+
+    \eqref{prop:inv_of_inv}
+    Consider an element $g \in G$. We have $g^{-1} \cdot (g^{-1})^{-1} = e = g^{-1} \cdot g$. If we multiply by $g$ on the left, we get $(g^{-1})^{-1} = g$.
+
+    \eqref{prop:reverse_inv}
+    Consider $g_1, g_2 \in G$. Then, by associativity, we have $(g_2^{-1} \cdot g_1^{-1}) \cdot (g_1 \cdot g_2) = g_2^{-1} \cdot (g_1^{-1} \cdot g_1) \cdot g_2 = g_2^{-1} \cdot g_2 = e$.
+\end{proof}
+
+\begin{remark}
+    Since the inverse is unique, the equation $a \cdot x = b$ for $a, b, x \in G$ implies a unique solution $x = a^{-1} \cdot b$. The same holds for $y \cdot a = b$, which yields $y = b \cdot a^{-1}$.
+
+    In particular, for $u, v \in G$, the equality $a \cdot u = a \cdot v$ implies $u = w$ since we can multiply both sides by $a^{-1}$ on the left. Analogously, the equality $u \cdot a = v \cdot a$ implies $u = v$ after multiplying by $a^{-1}$ on the right of both sides.
+\end{remark}
+
+\begin{definition}[Abelian group]
+    A group $G$ is said to be \emph{abelian} if its operation is commutative.
+    \begin{equation}
+        \forall g_1, g_2 \in G, g_1 \cdot g_2 = g_2 \cdot g_1
+        \label{eq:abelian_group}
+    \end{equation}
+\end{definition}

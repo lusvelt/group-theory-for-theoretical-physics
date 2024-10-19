@@ -1,0 +1,30 @@
+\usepackage[utf8]{inputenc}   % Character encoding
+\usepackage[T1]{fontenc}      % Font encoding
+\usepackage[english]{babel}   % Language
+\usepackage{amsmath, amssymb} % Math symbols
+\usepackage{amsthm}
+\usepackage{graphicx}         % Insert graphics
+\usepackage{geometry}         % Page layout settings
+\usepackage{hyperref}         % Clickable references and links
+\usepackage{cite}             % To habdle citations properly
+\usepackage{url}         % To format URLs in references
+\usepackage{enumitem}
+\usepackage{imakeidx}
+
+
+% Define theorem-like environments
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}  % Proposition shares numbering with theorems
+\newtheorem{example}{Example}[chapter]          % Example shares numbering with theorems
+
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+
+\makeindex
