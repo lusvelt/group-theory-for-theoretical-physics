@@ -24,6 +24,7 @@ The main reference for this chapter and the following ones is \cite{Tung1985}.
         \end{equation}
     \end{enumerate}
 \end{definition}
+If it is non-ambiguous, one can omit the multiplication symbol $g \cdot h = gh$.
 
 \begin{proposition}
     The following properties hold:
@@ -31,26 +32,24 @@ The main reference for this chapter and the following ones is \cite{Tung1985}.
         \item The identity element $e \in G$ is unique. \label{prop:unique_neutral}
         \item The inverse $g^{-1} \in G$ of each group element $g \in G$ is unique. \label{prop:unique_inverse}
         \item The inverse of the inverse is the original element: $\forall g \in G, (g^{-1})^{-1} = g$ \label{prop:inv_of_inv}
-        \item $\forall g_1, g_2 \in G, (g_1 \cdot g_2)^{-1} = g_2^{-1} g_1^{-1}$ \label{prop:reverse_inv}
+        \item $\forall g_1, g_2 \in G, (g_1 g_2)^{-1} = g_2^{-1} g_1^{-1}$ \label{prop:reverse_inv}
     \end{enumerate}
 \end{proposition}
 \begin{proof}
-    \eqref{prop:unique_neutral}
-    Suppose we had two identity elements $e_1, e_2 \in G$.
-    Then, by \eqref{eq:group_neutral}, we have
-    \begin{equation*}
-        e_1 = e_1 \cdot e_2 = e_2
-    \end{equation*}
+    \begin{enumerate}
+        \item Suppose we had two identity elements $e_1, e_2 \in G$.
+        Then, by \eqref{eq:group_neutral}, we have
+        \begin{equation*}
+            e_1 = e_1 \cdot e_2 = e_2
+        \end{equation*}
 
-    \eqref{prop:unique_inverse}
-    Consider $g \in G$ and suppose it had to inverses $h_1, h_2 \in G$.
-    This means that $h_2 = e \cdot h_2 = (h_1 \cdot g) \cdot h_2 = h_1 \cdot (g \cdot h_2) = h_1 \cdot e = h_1$, where we used associativity \eqref{eq:group_associativity}.
+        \item Consider $g \in G$ and suppose it had to inverses $h_1, h_2 \in G$.
+        This means that $h_2 = e \cdot h_2 = (h_1 \cdot g) \cdot h_2 = h_1 \cdot (g \cdot h_2) = h_1 \cdot e = h_1$, where we used associativity \eqref{eq:group_associativity}.
 
-    \eqref{prop:inv_of_inv}
-    Consider an element $g \in G$. We have $g^{-1} \cdot (g^{-1})^{-1} = e = g^{-1} \cdot g$. If we multiply by $g$ on the left, we get $(g^{-1})^{-1} = g$.
+        \item Consider an element $g \in G$. We have $g^{-1} \cdot (g^{-1})^{-1} = e = g^{-1} \cdot g$. If we multiply by $g$ on the left, we get $(g^{-1})^{-1} = g$.
 
-    \eqref{prop:reverse_inv}
-    Consider $g_1, g_2 \in G$. Then, by associativity, we have $(g_2^{-1} \cdot g_1^{-1}) \cdot (g_1 \cdot g_2) = g_2^{-1} \cdot (g_1^{-1} \cdot g_1) \cdot g_2 = g_2^{-1} \cdot g_2 = e$.
+        \item Consider $g_1, g_2 \in G$. Then, by associativity, we have $(g_2^{-1} \cdot g_1^{-1}) \cdot (g_1 \cdot g_2) = g_2^{-1} \cdot (g_1^{-1} \cdot g_1) \cdot g_2 = g_2^{-1} \cdot g_2 = e$.
+    \end{enumerate}
 \end{proof}
 
 \begin{remark}
@@ -66,3 +65,49 @@ The main reference for this chapter and the following ones is \cite{Tung1985}.
         \label{eq:abelian_group}
     \end{equation}
 \end{definition}
+
+\begin{definition}[Subgroup]
+    Suppose we have a group $(G, \cdot)$ and $H \subset G$. Then, we say that $H$ is a subgroup of $G$ if it is closed under the group operation.
+    \begin{equation*}
+        \forall h_1, h_2 \in H, h_1 \cdot h_2 \in H
+    \end{equation*}
+\end{definition}
+
+\begin{definition}[Homomorphism]
+    Let $(G, \cdot)$ and $(H, \ast)$ be two groups and $\phi: G \rightarrow H$.
+    Then, we say that $\phi$ is a \emph{homomorphism} if
+    \begin{equation*}
+        \forall g_1, g_2 \in G, \phi(g_1 \cdot g_2) = \phi(g_1) \ast \phi(g_2)
+    \end{equation*}
+\end{definition}
+
+\begin{definition}[Conjugation]
+    Let $G$ be a group and $a, b \in G$. We say that $a$ and $b$ are conjugate if there exists $g \in G$ such that
+    \begin{equation*}
+        b = g \cdot a \cdot g^{-1}
+    \end{equation*}
+\end{definition}
+\begin{example}
+    In the case of $G = GL(N)$, which is the set of $N \times N$ invertible matrices, two matrices are conjugate if they are related by similarity $B = P A P^{-1}$.
+\end{example}
+
+\begin{proposition}
+    Conjugacy is an equivalence relation.
+\end{proposition}
+\begin{proof}
+    \begin{enumerate}
+        \item Reflexivity: $a = gag^{-1}$ when $g = \mathbb{I} \in G$
+        \item Symmetry: assume $b = gag^{-1}$ for some $g \in G$. Then, if we multiply by $g^{-1}$ on the left and $g$ on the right both sides, we get $g^{-1}bg = a$
+        \item Transitivity: assume $b = gag^{-1}$ and $c=hbh^{-1}$, then $c = (hg)ag^{-1}h^{-1} = (hg)a(hg)^{-1}$
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}[Conjugacy class]
+    Given an element $a \in G$, we define the following equivalence class, called \emph{conjugacy class} of $a$
+    \begin{equation*}
+        Cl(a) = \{h \in G | \exists g \in G, a = g h g^{-1}\}
+    \end{equation*}
+\end{definition}
+\begin{remark}
+    If the group $G$ is abelian, all its conjugacy classes are singlets, since $a = ghg^{-1} = hgg^{-1} = h$.
+\end{remark}
