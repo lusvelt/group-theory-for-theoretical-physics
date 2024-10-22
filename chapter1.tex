@@ -1,8 +1,11 @@
-\chapter{Introduction to group theory}
-The main reference for this chapter and the following ones is \cite{Tung1985}.
+\chapter{Formal group theory and representations}
+The goal of this chapter is to develop the abstract tools to deal with groups, and therefore it aims to be general.
+The main references for this chapter and the following ones are \cite{Barone2004} and \cite{Tung1985}.
 
 
 \section{Basic Concepts}
+
+The choice of the basic concepts follows \cite{Barone2004}.
 
 \begin{definition}[Group]
     A group $G$ is a set endowed with an internal operation $\cdot: G \times G \rightarrow G$, which satisfies the following properties:
@@ -58,6 +61,8 @@ If it is non-ambiguous, one can omit the multiplication symbol $g \cdot h = gh$.
     In particular, for $u, v \in G$, the equality $a \cdot u = a \cdot v$ implies $u = w$ since we can multiply both sides by $a^{-1}$ on the left. Analogously, the equality $u \cdot a = v \cdot a$ implies $u = v$ after multiplying by $a^{-1}$ on the right of both sides.
 \end{remark}
 
+From now on, we will denote the identity element as $\idop$, and if the group to which it belongs is ambiguous, we add a subscript $\idop_g \in G$.
+
 \begin{definition}[Abelian group]
     A group $G$ is said to be \emph{abelian} if its operation is commutative.
     \begin{equation}
@@ -67,17 +72,9 @@ If it is non-ambiguous, one can omit the multiplication symbol $g \cdot h = gh$.
 \end{definition}
 
 \begin{definition}[Subgroup]
-    Suppose we have a group $(G, \cdot)$ and $H \subset G$. Then, we say that $H$ is a subgroup of $G$ if it is closed under the group operation.
+    Suppose we have a group $(G, \cdot)$ and $H \subset G$. Then, we say that $H$ is a subgroup of $G$ if $H$ itself is a group (with identity element $\idop_H = \idop_G$),which is closed under the group operation
     \begin{equation*}
         \forall h_1, h_2 \in H, h_1 \cdot h_2 \in H
-    \end{equation*}
-\end{definition}
-
-\begin{definition}[Homomorphism]
-    Let $(G, \cdot)$ and $(H, \ast)$ be two groups and $\phi: G \rightarrow H$.
-    Then, we say that $\phi$ is a \emph{homomorphism} if
-    \begin{equation*}
-        \forall g_1, g_2 \in G, \phi(g_1 \cdot g_2) = \phi(g_1) \ast \phi(g_2)
     \end{equation*}
 \end{definition}
 
@@ -111,3 +108,177 @@ If it is non-ambiguous, one can omit the multiplication symbol $g \cdot h = gh$.
 \begin{remark}
     If the group $G$ is abelian, all its conjugacy classes are singlets, since $a = ghg^{-1} = hgg^{-1} = h$.
 \end{remark}
+
+\begin{definition}[Invariant subgroup]
+    Let $G$ be a group and $H \subset G$ a subgroup. We say that $H$ is an \emph{invariant subgroup} if it is closed under $G$-conjugacy, i.e.
+    \begin{equation*}
+        \forall g \in G, \forall h \in H, ghg^{-1} \in H
+    \end{equation*}
+\end{definition}
+\begin{remark}
+    The subgroups $\{\idop\}$ and $G$ itself are the trivial invariant subgroups.
+\end{remark}
+\begin{remark}
+    All the subgroups of an abelian group are necessarily invariant subgroups, since conjugacy does not affect their elements.
+\end{remark}
+
+\begin{definition}[Simple and semi-simple group]
+    A group $G$ is said to be \emph{simple} if it has no non-trivial invariant subgroups.
+    It is said \emph{semi-simple} if it has no non-trivial \emph{abelian} invariant subgroups.
+\end{definition}
+
+\begin{definition}[Direct product]
+    A group $G$ is the \emph{direct product} of two of its invariant subgroups $G = G_1 \otimes G_2$ if
+    \begin{enumerate}
+        \item the only common element between $G_1$ and $G_2$ is the identity: $G_1 \cap G_2 = \{\idop_G\}$
+        \item each element of $G_1$ commutes with each element of $G_2$: $g_1 g_2 = g_2 g_1 \forall g_1 \in G_1, g_2 \in G_2$
+        \item every element of $g \in G$ admits a unique decomposition in terms of an element of $G_1$ and an element of $G_2$: $\forall g \in G, \exists ! g_1 \in G_1, g_2 \in G_2, g = g_1 g_2$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Coset]
+    Let $H$ be a subgroup of $G$ and $g \in G \setminus H$. We define the \emph{left coset} and \emph{right coset} of $H$ respectively
+    \begin{align*}
+        gH &= \{gh | h \in H\} \\
+        Hg &= \{hg | h \in H\}
+    \end{align*}
+\end{definition}
+
+\begin{proposition}
+    Let $H$ be an invariant subgroup of $G$. Then, the left and right cosets of $H$ coincide $gH = Hg$.
+\end{proposition}
+\begin{proof}
+    We need to show that $\forall l \in gH, l \in Hg$ and viceversa.
+
+    Indeed, if $l \in gH$ then there exists $h \in H$ such that $l = gh$.
+    Since $H$ is an invariant subgroup, it means that $ghg^{-1} \in H$, and therefore $h' = lg^{-1} \in H$. Now, since $h'g \in Hg$, we have $lg^{-1}g = l \in Hg$.
+    
+    Conversely, if $r \in Hg$, then there exists $h \in H$ such that $r = hg$.
+    Since $H$ is an invariant subgroup, it means that $g^{-1}hg \in H$ and therefore $h' = g^{-1}r \in H$. Since $gh' \in gH$, we have $g^{-1}gr = r \in gH$.
+\end{proof}
+
+\begin{definition}[Quotient group]
+    Given an invariant subgroup $H$ of a group $G$, we define the quotient group $G/H$ as the coset of $H$ alongside with the identity $G/H = gH \cup \{\idop H\} = Hg \cup \{\idop H\}$ with the multiplication law $\forall g_1, g_2 \in G \setminus H \cup \{\idop\}$
+    \begin{equation*}
+        g_1H \cdot g_2H = (g_1 \cdot g_2) H
+    \end{equation*}
+\end{definition}
+
+
+\section{Homomorphisms}
+
+\begin{definition}[Homomorphism]
+    Let $(G, \cdot)$ and $(H, \ast)$ be two groups and $\phi: G \rightarrow H$.
+    Then, we say that $\phi$ is a \emph{homomorphism} if
+    \begin{equation*}
+        \forall g_1, g_2 \in G, \phi(g_1 \cdot g_2) = \phi(g_1) \ast \phi(g_2)
+    \end{equation*}
+\end{definition}
+
+\begin{definition}[Endomorphism]
+    An \emph{endomorphism} is a homomorphism from a group $G$ to itself.
+\end{definition}
+
+\begin{definition}[Isomorphism]
+    An \emph{isomorphism} is a bijective homomorphism.
+\end{definition}
+\begin{remark}
+    Isomorphism between two groups is an equivalence relation.
+\end{remark}
+
+\begin{definition}[Automorphism]
+    An \emph{automorphism} is a bijective endomorphism, or equivalently an isomorphism from a group $G$ to itself.
+\end{definition}
+
+\begin{definition}[Kernel]
+    The kernel of a homomorphism $\phi: G \rightarrow H$ is the set $\ker{G}$ of all elements of $G$ that are mapped to the identity of $H$.
+\end{definition}
+
+\begin{proposition}
+    The kernel $\ker{G}$ of a homomorphism $\phi: G \rightarrow H$ is an invariant subgroup of $G$.
+\end{proposition}
+\begin{proof}
+    We need to show that $\forall k \in \ker{G}, \forall g \in G, gkg^{-1} \in \ker{G}$.
+    Let us evaluate $\phi(gkg^{-1})$. By definition of homomorphism and by associativity we indeed have
+    \begin{equation*}
+        \phi(gkg^{-1}) = \phi(g) \phi(k) \phi(g)^{-1} = \phi(g) \idop_H \phi(g)^{-1} = \idop_H
+    \end{equation*}
+\end{proof}
+
+
+\section{Classical groups}
+This section references \cite{Zucchini}, chapters 2 and 3.
+
+\begin{definition}[Function group]
+    Let $A$ be a set. We define the function group $S(A)$ as the set of all invertible functions
+    \begin{equation*}
+        S(A) = \{f: A \rightarrow A | \exists f^{-1}\}
+    \end{equation*}
+\end{definition}
+\begin{proposition}
+    The set $S(A)$ endowed with the composition operation $(f_1 \circ f_2)(a) \equiv f_1(f_2(a))$ forms a group, with the identity being the function $Id(a) = a$.
+\end{proposition}
+
+\begin{definition}[$GL(V)$]
+    Let $V$ be a finite-dimensional linear space over the field $\mathbb{K} \in \{\mathbb{R}, \mathbb{C}\}$. The \emph{general linear group} $GL(V)$ is defined as the set of all invertible endomorphisms in $V$.
+    \begin{equation*}
+        GL(V) = \text{End}(V) \cap S(V)
+    \end{equation*}
+\end{definition}
+\begin{proposition}
+    $GL(V)$ is a subgroup of $S(V)$, hence itself a group.
+\end{proposition}
+
+\begin{remark}
+    Since all the elements in $GL(V)$ are invertible, then they have non-vanishing determinant.
+\end{remark}
+
+
+\begin{definition}[$SL(V)$]
+    Let $V$ be a finite-dimensional linear space over the field $\mathbb{K} \in \{\mathbb{R}, \mathbb{C}\}$. We define the \emph{special linear group} as
+    \begin{equation*}
+        SL(V) = \{X \in GL(V) | \det X = 1\}
+    \end{equation*}
+\end{definition}
+\begin{proposition}
+    $SL(V)$ is a subgroup of $GL(V)$.
+\end{proposition}
+
+
+
+
+
+\section{Representations}
+
+
+\begin{definition}[Representation]
+    Let $G$ be a group and $V$ a linear space over real or complex scalars. A \emph{representation} of $G$ on $V$ is any group homomorphism $D: G \rightarrow \text{Aut}(V)$.
+\end{definition}
+\begin{remark}
+    By definition of homomorphism, we have that $\forall g, h \in G$,
+    \begin{enumerate}
+        \item $D(gh) = D(g) D(h)$
+        \item $D(g^{-1}) = D(g)^{-1}$
+        \item $D(\idop_G) = \idop_V$
+    \end{enumerate}
+\end{remark}
+
+
+\begin{proposition}[Direct sum of representations]
+    Let $G$ be a group and $V_i$ with $i \in \{1, \ldots, N\}$ be linear spaces on the same field $\mathbb{K}$. Let also $D_i: G \rightarrow V_i$ be representations of $G$.
+    Then, the mapping $R: G \rightarrow \text{Aut}(\oplus_i V_i)$ defined by
+    \begin{equation*}
+        R(g) = \oplus_i D_i(g)
+    \end{equation*}
+    for all $g \in G$, is a representation of $G$ in $\oplus_i V_i$, called \emph{direct sum} of the representations $D_i$ and indicated with $R = \oplus_i D_i$
+\end{proposition}
+
+
+\begin{proposition}[Direct product of representations]
+    Let $G$ be a group and $V_i$ with $i \in \{1, \ldots, N\}$ be linear spaces on the same field $\mathbb{K}$. Let also $D_i: G \rightarrow V_i$ be representations of $G$.
+    Then, the mapping $R: G \rightarrow \text{Aut}(\otimes_i V_i)$ defined by
+    \begin{equation*}
+        R(g) = \otimes_i D_i(g)
+    \end{equation*}
+    for all $g \in G$, is a representation of $G$ in $\otimes_i V_i$, called \emph{direct product} of the representations $D_i$ and indicated with $R = \otimes_i D_i$
+\end{proposition}

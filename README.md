@@ -19,6 +19,9 @@ To write numbered lists (for example when listing properties of a mathematical o
 ### Labels
 To reference equations, use `\eqref{eq:myeq}`
 
+### Custom commands
+`\idop` is the identity operator `$\mathbbm{1}$`
+
 ### Environments
 The following environments are defined:
 - theorem
