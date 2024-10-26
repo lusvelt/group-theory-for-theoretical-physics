@@ -248,7 +248,11 @@ This section references \cite{Zucchini}, chapters 2 and 3.
 
 
 
+
+
 \section{Representations}
+
+\subsection{Basic concepts}
 
 
 \begin{definition}[Representation]
@@ -282,3 +286,108 @@ This section references \cite{Zucchini}, chapters 2 and 3.
     \end{equation*}
     for all $g \in G$, is a representation of $G$ in $\otimes_i V_i$, called \emph{direct product} of the representations $D_i$ and indicated with $R = \otimes_i D_i$
 \end{proposition}
+
+\begin{remark}
+    Recall that the direct sum $S$ of two matrices $A$ and $B$, respectively $(m \times n)$ and $(p \times q)$ is given by a $(m + p) \times (n + q)$ block-diagonal matrix whose blocks are the two starting matrices in the order they enter the sum (therefore, the direct sum is not commutative, strictly speaking), that is
+    \begin{equation*}
+        S = A \oplus B = \begin{pmatrix}
+            A & 0 \\
+            0 & B
+        \end{pmatrix}
+    \end{equation*}
+
+
+    Also recall that the direct product $P$ of $A$ and $B$ is given by a $(m \cdot p) \times (n \cdot q)$ matrix such that
+    \begin{equation*}
+        P = A \otimes B = \begin{pmatrix}
+            a_{11} B & a_{12} B & \cdots & a_{1n} B \\
+            a_{21} B & a_{22} B & \cdots & a_{2n} B \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{m1} B & a_{m2} B & \cdots & a_{mn} B
+        \end{pmatrix}
+    \end{equation*}
+\end{remark}
+
+
+\begin{definition}[Equivalent representations]
+    Let $G$ be a group, and let $D_1$ and $D_2$ be two representations of $G$ on the linear spaces $V_1$ and $V_2$ over the field $\mathbb{K}$.
+    We say that the two representations are equivalent and write $D_1 \simeq D_2$ if there exists an isomorphism $A \in \text{Iso}(V_1, V_2)$ such that
+    \begin{equation*}
+        \forall g \in G, D_2(g) = A D_1(g) A^{-1}
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    The representation equivalence is an equivalence relation.
+\end{proposition}
+\begin{proof}
+    We need to show that $\simeq$ is reflexive, symmetric and transitive.
+    \begin{enumerate}
+        \item Reflexivity: of course $D_1 \simeq D_1$ since we can choose $A = \idop$
+        \item Symmetry: suppose $\exists A \in \text{Iso}(V_1,V_2) \forall g \in G, D_2(g) = A D_1(g) A^{-1}$, then we have that $\forall g \in G, D_1(g) = A^{-1} D_2(g) A$, and we know that $A^{-1} \in \text{Iso}(V_2, V_1)$, which implies $D_2 \simeq D_1$
+        \item Transitivity: suppose $\exists A \in \text{Iso}(V_1,V_2) \forall g \in G, D_2(g) = A D_1(g) A^{-1}$ and $\exists B \in \text{Iso}(V_2,V_3) \forall g \in G, D_3(g) = B D_2(g) B^{-1}$. Then we can write $\forall g \in G, D_3(g) = B A D_1(g) A^{-1} B^{-1} = (BA) D_1(g) (BA)^{-1}$, where $BA \in \text{Iso}(V_1, V_3)$, which implies $D_1 \simeq D_3$.
+    \end{enumerate}
+\end{proof}
+\begin{remark}
+    We can thus build a quotient set of inequivalent representations by considering the set of equivalence classes which group equivalent representations.
+\end{remark}
+
+\begin{proposition}
+    Let $D$ be a representation of a group $G$ in the linear space $V$, and let $L\neq 0$ be a subspace of $V$ which is invariant under $D(g) \forall g \in G$. The mapping $D |_L: G \rightarrow \text{Aut}(L)$ defined as
+    \begin{equation*}
+        (D|_L)(g) = D(g)|_L \forall g \in G 
+    \end{equation*}
+    is a representation of $G$ on $L$.
+\end{proposition}
+
+\begin{definition}[Reducible representation]
+    A representation $D$ of a group $G$ on a linear space $V$ is said to be \emph{reducible} if there is a non-trivial invariant subspace $L$ of $V$ which is invariant under $D(g)\ \forall g \in G$.
+\end{definition}
+
+\begin{definition}[Completely reducible representation]
+    A representation $D$ of a group $G$ on a linear space $V$ is said to be \emph{completely reducible} if there are non-trivial non-intersecting subspaces $L_1, L_2 \subset V$ invariant under $D(g)\ \forall g \in G$ such that $V = L_1 \oplus L_2$. 
+\end{definition}
+
+\begin{proposition}
+    A representation $D$ of a group $G$ is completely reducible if and only if there exist two representations $D_1, D_2$ such that
+    \begin{equation*}
+        D \simeq D_1 \oplus D_2
+    \end{equation*}
+\end{proposition}
+
+
+
+\begin{definition}[Character]
+    Let $D$ be a representation of $G$ on the linear space $V$ over the field $\mathbb{K}$. The character of $D$ is the function $\chi_D: G \rightarrow \mathbb{K}$ defined by 
+    \begin{equation*}
+        \chi_D(g) = \text{tr}D(g),\ \forall g \in G
+    \end{equation*} 
+\end{definition}
+
+
+\subsection{Unitary representations}
+
+\begin{definition}[Unitary representation]
+    A representation $D$ of a group $G$ on a Hilbert space $V$ over the field $\mathbb{C}$ is said to be \emph{unitary} if
+    \begin{equation*}
+        \forall g \in G,\ D(g)^{\dagger} = D(g)^{-1}
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}[Weyl]
+    Let $D$ be a unitary representation of $G$ on the linear space $V$ over $\mathbb{C}$. Then, $D$ is reducible if and only if it is completely reducible.
+\end{theorem}
+\begin{proof}
+    If $D$ is completely reducible, the it is trivially also reducible.
+    Let $D$ be reducible, then there exists a non-trivial subspace $L$ of $V$ invariant under $D$. Since $V$ is a Hilbert space, the inner product is defined, and we can consider the orthogonal non-trivial complement $L^{\bot}$ of $L$ such that $V = L^{\bot} \oplus L$.
+    Let us show that $L^{\bot}$ is invariant under $D$. Let $x \in L^{\bot}$ and $y \in L$. Then
+    \begin{equation*}
+        \langle D(g)x, y \rangle = \langle x, D(g)^{\dagger} y \rangle = \langle x, D(g^{-1})y \rangle = 0
+    \end{equation*}
+    where, in the last equality, we used the fact that $D(g^{-1})y \in L$, being $L$ invariant under $D$. Therefore we showed that $D(g)x$ is orthogonal to $y$ for all $y \in L$ and for all $g \in G$. This means that $D(g)x \in L^{\bot}$ for all $x \in L^{\bot}$ and for all $g \in G$. Therefore, $L^{\bot}$ is invariant under $D$. This means that $D$ is completely reducible.
+\end{proof}
+
+\begin{proposition}
+    Let $D$ be a unitary representation of $G$ over a finite linear space $V$. Then, there exsist a finite number of irreducible inequivalent unitary representations $D_i,\ i \in \{1, \ldots, p\}$ such that $D \simeq \oplus_{i=1}^p D_i$.
+\end{proposition}
+

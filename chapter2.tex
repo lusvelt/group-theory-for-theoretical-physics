@@ -1,0 +1,111 @@
+\chapter{Lie groups}
+
+\section{Lie algebras}
+\begin{definition}[Lie algebra]
+    A \emph{Lie algebra} over the field $\mathbb{K}$ is a vector space $\mathfrak{a}$ over $\mathbb{K}$ equipped with a bilinear map $[\cdot, \cdot]: \mathfrak{a} \times \mathfrak{a} \rightarrow \mathfrak{a}$, called \emph{Lie brackets} with the following properties:
+    \begin{enumerate}
+        \item Antisymmetry: $\forall X, Y \in \mathfrak{a},\ [X, Y] + [Y, X] = 0$
+        \item Jacobi identity: $\forall X, Y, Z \in \mathfrak{a},\ [X, [Y, Z]] + [Y,[Z,X]] + [Z,[X,Y]] = 0$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Abelian Lie algebra]
+    A Lie algebra $\mathfrak{a}$ is said to be \emph{abelian} if
+    \begin{equation*}
+        \forall X, Y, \in \mathfrak{a},\ [X,Y] = 0
+    \end{equation*}
+\end{definition}
+
+\begin{definition}[Structure constants]
+    Let $\{t_a\ |\ a \in \{1, \ldots, n\}\}$ a basis of a Lie algebra $\mathfrak{a}$. Since Lie brackets always output an element of $\mathfrak{a}$, we can expand it onto the basis, so we can write
+    \begin{equation*}
+        [t_a, t_b] = f^c_{ab} t_c
+    \end{equation*}
+    with summed index $c \in \{1, \ldots, n\}$, and where $f^c_{ab} \in \mathbb{K}$.
+\end{definition}
+
+\begin{proposition}
+    The \emph{structure constants} $f^c_{ab} \in \mathbb{K}$ of a Lie algebra $\mathfrak{a}$ with respect to the basis $\{t_a\}_{a=1}^n$ satisfy the following properties:
+    \begin{enumerate}
+        \item $f^c_{ab} + f^c_{ba} = 0$
+        \item $f^d_{ae}f^e_{bc} + f^d_{be}f^{e}_{ca} + f^d_{ce}f^e_{ab} = 0$
+        \item if 
+    \end{enumerate}
+    where the first is given by antisymmetry of Lie brackets, and the second follows from Jacobi identity.
+\end{proposition}
+
+\begin{definition}[Lie subalgebra]
+    Let $\mathfrak{a}$ be a Lie algebra and let $\mathfrak{b} \subseteq \mathfrak{a}$ be a non-null linear subspace.
+    Then, $\mathfrak{b}$ is a \emph{Lie subalgebra} of $\mathfrak{a}$ if it is closed under Lie brackets of $\mathfrak{a}$, that is
+    \begin{equation*}
+        \forall X, Y \in \mathfrak{b},\ [X,Y] \in \mathfrak{b}
+    \end{equation*}
+    In this case, $\mathfrak{b}$ itself is a Lie algebra, with Lie brackets inherited by $\mathfrak{a}$.
+\end{definition}
+
+\begin{definition}[Lie ideal]
+    Let $\mathfrak{a}$ be a Lie algebra and let $\mathfrak{b} \subseteq \mathfrak{a}$ be a non-null linear subspace.
+    Then, $\mathfrak{b}$ is a \emph{Lie ideal} of $\mathfrak{a}$ if it is invariant under $\mathfrak{a}$, that is
+    \begin{equation*}
+        \forall X \in \mathfrak{b},\ \forall Y \in \mathfrak{a},\ [X, Y] \in \mathfrak{b}
+    \end{equation*}
+\end{definition}
+\begin{proposition}
+    A Lie ideal $\mathfrak{b}$ of a Lie algebra $\mathfrak{a}$ is also a subalgebra of $\mathfrak{a}$, as implied by its definition.
+\end{proposition}
+
+\begin{proposition}
+    The union of arbitrary subalgebras (ideals) of a Lie algebra $\mathfrak{a}$ is itself a subalgebra (ideal) of $\mathfrak{a}$.
+\end{proposition}
+
+\begin{definition}[Lie algebra homomorphism]\label{def:lie_homomorphism}
+    A \emph{Lie algebra homomorphism} between Lie algebras $\mathfrak{a}, \mathfrak{b}$ is a linear map $\phi: \mathfrak{a} \rightarrow \mathfrak{b}$ which preserves Lie brackets, that is
+    \begin{equation*}
+        \forall X, Y \in \mathfrak{a},\ \phi([X,Y]) = [\phi(X), \phi(Y)]
+    \end{equation*}
+\end{definition}
+
+
+
+
+
+\section{Lie algebra representations}
+
+To define representations of Lie algebras, we need the definition of the classical Lie algebra $\mathfrak{gl}(V)$.
+
+\begin{definition}[General linear Lie algebra]
+    Let $V$ be a linear space over a field $\mathbb{K}$ and $X, Y \in \text{End}(V)$. Then we define $\mathfrak{gl}(V) = \text{End}(V)$ as the Lie algebra (over $\mathbb{K}$) having as Lie brackets the commutator
+    \begin{equation*}
+        \forall X, Y \in \text{End}(V),\ [X, Y] = XY - YX
+    \end{equation*} 
+\end{definition}
+
+Now we can move to representations.
+
+\begin{definition}[Lie algebra representation]
+    Let $\mathfrak{a}$ be a Lie algebra over the field $\mathbb{K}$ and let $V$ be a linear space over $\mathbb{L}$ with $\mathbb{K} \subseteq \mathbb{L}$.
+    Then, a \emph{Lie algebra representation} of $\mathfrak{a}$ on $V$ is any Lie algebra homomorphism $\phi \in \text{Hom}(\mathfrak{a}, \mathfrak{gl}(V))$.
+\end{definition}
+
+\begin{definition}[Adjoint representation]
+    Let $\mathfrak{a}$ be a Lie algebra and $X \in \mathfrak{a}$.
+    We define $\text{ad}: \mathfrak{a} \rightarrow \text{End}(\mathfrak{a}) = \mathfrak{gl}(\mathfrak{a})$ such that, for all $Y \in \mathfrak{a}$,
+    \begin{equation*}
+        \text{ad}(X)Y = [X,Y]
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    $\text{ad}$ is a representation of $\mathfrak{a}$ on the linear space $\mathfrak{a}$ (indeed we know by definition that a Lie algebra is a linear space).
+\end{proposition}
+\begin{proof}
+    We need to show that $\text{ad} \in \text{Hom}(\mathfrak{a}, \mathfrak{gl}(\mathfrak{a}))$, that is satisfies the definition \ref{def:lie_homomorphism}.
+    Indeed, since Lie brackets are linear in the first argument, then also $\text{ad}$ is linear by construction.
+    Now we verify that it preserves Lie brackets. Let $X, Y, Z \in \mathfrak{a}$, then
+    \begin{align*}
+        \text{ad}([X,Y])Z &= [[X,Y], Z] = -[Z, [X,Y]] = [X, [Y,Z]] + [Y, [Z,X]] \\
+        &= [X, [Y,Z]] - [Y, [X,Z]] = \\
+        &= \text{ad}(X)\text{ad}(Y)Z - \text{ad}(Y)\text{ad}(X)Z = [\text{ad}(X), \text{ad}(Y)]Z
+    \end{align*}
+    Since $Z$ is arbitrary, we showed $\text{ad}([X,Y]) = [\text{ad}(X), \text{ad}(Y)]$, and thus $\text{ad}$ is indeed a homomorphism, and therefore a Lie algebra representation.
+\end{proof}
